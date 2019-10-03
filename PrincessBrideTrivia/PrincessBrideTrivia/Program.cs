@@ -90,7 +90,21 @@ namespace PrincessBrideTrivia
                 question.Answers[2] = answer3;
                 question.CorrectAnswerIndex = correctAnswerIndex;
 
-                questions[i] = question;//my fix
+                Random randGen = new Random();
+                int randIndex = randGen.Next(questions.Length-1);
+                bool full = false;
+                while (questions[randIndex] != null && !full)
+                {
+                    foreach(Question q in questions)
+                    {
+                        full = true;
+                        if(q == null)
+                        {
+                            full = false;
+                        }
+                    }
+                }
+                //questions[randIndex] = question;//my fix
             }
             return questions;
         }
