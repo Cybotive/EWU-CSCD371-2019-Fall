@@ -40,7 +40,10 @@ namespace ScratchWorking
                 throw;
             }
 
-            Pets pets = Pets.Dog;
+            Pets pet = default;
+            Print(pet);
+
+            var josh = new Person("Josh", DateTime.Now);
         }
 
         public static void AddNumbers((int, int) numbers)
@@ -50,7 +53,24 @@ namespace ScratchWorking
 
         public static void Print(Object foo) => Console.WriteLine(foo.ToString());
 
-        [Flags]
+        public class Person
+        {
+            private string Name { get; set; }
+
+            public DateTime Dob { get; }
+
+            private string Ssn { get; set; }
+
+            public Person(string name, DateTime dob, string ssn = null) //ssn defaults to null to make it clear its allowed
+            {
+
+                Name = name ?? throw new ArgumentNullException(nameof(name));
+                Dob = dob;
+                Ssn = ssn;
+            }
+        }
+
+        [Flags]//Just means the values can be combined into another
         public enum Pets //pretend mixing animals makes sense. This stuff is on Assignment 5
         {
             Dog = 0b_0000,
