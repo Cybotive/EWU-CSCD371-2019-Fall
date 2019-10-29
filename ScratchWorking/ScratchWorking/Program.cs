@@ -8,6 +8,21 @@ namespace ScratchWorking
     {
         static void Main(string[] args)
         {
+            if (args is null)
+            {
+                throw new ArgumentException(nameof(args), "My message here"); //C# reversed the parameters so this is wrong
+            }
+
+            (string, string) _ = ("", ""); //tuple
+
+            int number = 42;
+            Print(number); //boxing, since Print takes in an Object
+
+            var numbers = (1, 2); //still a value type, so not passed by reference
+            Print(numbers); //(1, 2)
+            AddNumbers(numbers);
+            Print(numbers); //(1, 2)
+
             try
             {
                 //IO Stuff
@@ -23,5 +38,12 @@ namespace ScratchWorking
                 throw;
             }
         }
+
+        public static void AddNumbers((int, int) numbers)
+        {
+            numbers.Item1 += numbers.Item2;
+        }
+
+        public static void Print(Object foo) => Console.WriteLine(foo.ToString());
     }
 }
