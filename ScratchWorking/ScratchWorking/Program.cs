@@ -13,7 +13,9 @@ namespace ScratchWorking
                 throw new ArgumentException(nameof(args), "My message here"); //C# reversed the parameters so this is wrong
             }
 
+#pragma warning disable CS0219 // Variable is assigned but its value is never used
             (string, string) _ = ("", ""); //tuple
+#pragma warning restore CS0219 // Variable is assigned but its value is never used
 
             int number = 42;
             Print(number); //boxing, since Print takes in an Object
@@ -37,6 +39,8 @@ namespace ScratchWorking
                 Debug.WriteLine($"{e}"); //this is very bad. Don't log then rethrow without handling the exception
                 throw;
             }
+
+            Pets pets = Pets.Dog;
         }
 
         public static void AddNumbers((int, int) numbers)
@@ -45,5 +49,14 @@ namespace ScratchWorking
         }
 
         public static void Print(Object foo) => Console.WriteLine(foo.ToString());
+
+        [Flags]
+        public enum Pets //pretend mixing animals makes sense. This stuff is on Assignment 5
+        {
+            Dog = 0b_0000,
+            Cat = 0b_0001,
+            Bird = 0b_0010,
+            Chicken = 0b_0100
+        }
     }
 }
